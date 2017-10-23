@@ -26,7 +26,6 @@
 	<table class="table">
 	  <thead class="thead-dark">
 	    <tr>
-	      <th scope="col">#</th>
 	      <th scope="col">Fecha</th>
 	      <th scope="col">Lectura</th>
 	      <th scope="col">Consumo en el día</th>
@@ -36,7 +35,6 @@
 	  <tbody>
 	  	{% for l in lecturas %}
 		    <tr>
-		      <th scope="row">{{  l.id }}</th>
 		      <td>{{ l.fecha | date ("d-m-Y") }}</td>
 		      <td>{{ l.lectura }} Kw</td>
 		      <td>{% if lant != "" %}{{ lant - l.lectura }} {% else %} 0 {% endif %} Kw</td>
