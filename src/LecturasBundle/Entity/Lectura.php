@@ -93,5 +93,17 @@ class Lectura
     {
         return $this->fecha;
     }
+
+    /**
+     * Get fecha
+     *
+     * @return string
+     */
+    public function getFechaString()
+    {
+        $res = $this->getFecha()->format('d-m-Y');
+        return $res;
+
+    }
 }
 

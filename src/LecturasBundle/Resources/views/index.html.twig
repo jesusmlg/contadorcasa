@@ -18,6 +18,9 @@
 	  {{ form_end(form)}}
 	</div>
 
+	<div id="lecturas"></div>
+	{{ areachart('lecturas','lecturas') |raw }}
+
 	<H3 class="text-center">CONSUMOS</H3>
 	{% set lant = "" %}
 	<table class="table">

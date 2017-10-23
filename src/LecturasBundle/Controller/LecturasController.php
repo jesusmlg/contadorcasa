@@ -20,6 +20,20 @@ class LecturasController extends Controller
 
         $form->handleRequest($request);
 
+        //probando los gráficos de lava
+        $lava = $this->get('lavacharts');
+        $data = $lava->DataTable();
+
+        $data->addDateColumn('Fecha')->addNumberColumn('Lectura');
+
+        foreach ($lecturas as $l) {
+          
+          $row = [$l->getFechaString(), $l->getLectura()];
+          $data->addRow($row);
+        }
+
+        $lava->AreaChart('lecturas', $data,['title' => 'Lecturas Dibujo']);
+
         if($form->isSubmitted() && $form->isValid())
         {
           $lectura = $form->getData();
