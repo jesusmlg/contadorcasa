@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h2>Lecturas</h2>
+	<div>
+	  {{ form_start(form) }}
+	  	{{ form_errors(form)}}
+	  	<div class="form-group">
+	  		{{ form_row(form.lectura) }}
+	  	</div>
+	  	<div class="form-group jesus" style="display: block">
+	  		{{ form_row(form.fecha) }}
+	  	</div>
+	  	<div class="form-group">
+	  		{{ form_row(form.Agregar) }}
+	  	</div>
+
+	  {{ form_end(form)}}
+	</div>
+
+	<H3 class="text-center">CONSUMOS</H3>
+	{% set lant = "" %}
+	<table class="table">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Fecha</th>
+	      <th scope="col">Lectura</th>
+	      <th scope="col">Consumo en el día</th>
+	      <th scope="col">Acciones</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	{% for l in lecturas %}
+		    <tr>
+		      <th scope="row">{{  l.id }}</th>
+		      <td>{{ l.fecha | date ("d-m-Y") }}</td>
+		      <td>{{ l.lectura }} Kw</td>
+		      <td>{% if lant != "" %}{{ lant - l.lectura }} {% else %} 0 {% endif %} Kw</td>
+		      <td><a href="{{ path('lecturas_eliminar',{'id': l.id})}}">Borrar</a></td>
+			{% set lant = l.lectura %}
+		    </tr>
+	    {% endfor %}
+	  </tbody>
+	</table>
+
+{% endblock %}

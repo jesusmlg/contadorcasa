@@ -1,0 +1,6 @@
+lecturas_homepage:
+    path:     /
+    defaults: { _controller: LecturasBundle:Lecturas:index }
+lecturas_eliminar:
+  path: /lecturas/{id}/eliminar
+  defaults: { _controller: LecturasBundle:Lecturas:eliminar, id: id }
