@@ -2,6 +2,7 @@
 
 {% block body %}
 	<h2>Lecturas</h2>
+
 	<div>
 	  {{ form_start(form) }}
 	  	{{ form_errors(form)}}
@@ -44,5 +45,7 @@
 	    {% endfor %}
 	  </tbody>
 	</table>
-
+<div class="navigation text-center">
+    {{ knp_pagination_render(lecturas) }}
+</div>
 {% endblock %}

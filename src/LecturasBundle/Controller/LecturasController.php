@@ -20,7 +20,7 @@ class LecturasController extends Controller
 
         $form->handleRequest($request);
 
-        //probando los gráficos de lava
+        //LAVA GRAPHICS
         $lava = $this->get('lavacharts');
         $data = $lava->DataTable();
 
@@ -31,8 +31,23 @@ class LecturasController extends Controller
           $row = [$l->getFechaString(), $l->getLectura()];
           $data->addRow($row);
         }
+        
 
         $lava->AreaChart('lecturas', $data,['title' => 'Lecturas Dibujo']);
+
+        //END LAVA GRAPHICS
+
+        //PAGINATION
+        $dql = "SELECT lb FROM LecturasBundle:Lectura lb";
+        $query = $em->createQuery($dql);
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $lecturas, // $dql
+            $request->query->getInt('page',1),
+            5
+        );
+
+        //END PAGINATION
 
         if($form->isSubmitted() && $form->isValid())
         {
@@ -45,7 +60,7 @@ class LecturasController extends Controller
 
         }
 
-        return $this->render('LecturasBundle::index.html.twig', array('lecturas' => $lecturas,'form' => $form->createView()));
+        return $this->render('LecturasBundle::index.html.twig', array('lecturas' => $result,'form' => $form->createView()));
     }
 
     public function eliminarAction(Request $request)
