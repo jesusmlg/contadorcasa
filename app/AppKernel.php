@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new LecturasBundle\LecturasBundle(),
             new Khill\Lavacharts\Symfony\Bundle\LavachartsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FacturasBundle\FacturasBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

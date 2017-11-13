@@ -1,3 +1,7 @@
+facturas:
+    resource: "@FacturasBundle/Resources/config/routing.yml"
+    prefix:   /facturas
+
 lecturas:
     resource: "@LecturasBundle/Resources/config/routing.yml"
     prefix:   /

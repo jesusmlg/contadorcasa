@@ -7,12 +7,18 @@ use LecturasBundle\Entity\Lectura;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use LecturasBundle\Form\LecturaType;
+use Doctrine\ORM\EntityRepository;
 
 class LecturasController extends Controller
 {
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $ultimaFactura = $em->getRepository("FacturasBundle:Factura")->UltimaFactura();
+        $ultimaLectura = $em->getRepository("LecturasBundle:Lectura")->UltimaLectura();
+
+        $totalKWDesdeFactura = $ultimaLectura->getLectura() - $ultimaFactura->getLectura();
 
         $lecturas = $em->getRepository("LecturasBundle:Lectura")->findBy(array(),array('fecha' => 'DESC'));
 
@@ -27,11 +33,11 @@ class LecturasController extends Controller
         $data->addDateColumn('Fecha')->addNumberColumn('Lectura');
 
         foreach ($lecturas as $l) {
-          
+
           $row = [$l->getFechaString(), $l->getLectura()];
           $data->addRow($row);
         }
-        
+
 
         $lava->AreaChart('lecturas', $data,['title' => 'Lecturas Dibujo']);
 
@@ -52,7 +58,7 @@ class LecturasController extends Controller
         if($form->isSubmitted() && $form->isValid())
         {
           $lectura = $form->getData();
-          
+
           $em->persist($lectura);
           $em->flush();
 
@@ -60,7 +66,11 @@ class LecturasController extends Controller
 
         }
 
-        return $this->render('LecturasBundle::index.html.twig', array('lecturas' => $result,'form' => $form->createView()));
+        return $this->render('LecturasBundle::index.html.twig', array('lecturas' => $result,
+                                                                      'form' => $form->createView(),
+                                                                      'UltimaFactura' => $ultimaFactura,
+                                                                      'totalKWDesdeFactura'=> $totalKWDesdeFactura
+                                                                    ));
     }
 
     public function eliminarAction(Request $request)
@@ -73,7 +83,7 @@ class LecturasController extends Controller
       {
         $lectura = $em->getRepository('LecturasBundle:Lectura')->find($id);
         $em->remove($lectura);
-        $em->flush();        
+        $em->flush();
       }
 
       return $this->redirectToRoute('lecturas_homepage');

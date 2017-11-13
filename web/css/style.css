@@ -1,8 +1,8 @@
-#lecturasbundle_lectura_fecha_date
+#lecturasbundle_lectura_fecha_date,#facturasbundle_factura_fecha_date
 {
 	display: inline;
 }
-#lecturasbundle_lectura_fecha_time
+#lecturasbundle_lectura_fecha_time, #facturasbundle_factura_fecha_time
 {
 	display: inline;
 	margin-left: 20px;

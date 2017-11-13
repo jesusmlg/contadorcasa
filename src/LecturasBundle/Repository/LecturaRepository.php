@@ -10,4 +10,14 @@ namespace LecturasBundle\Repository;
  */
 class LecturaRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function UltimaLectura()
+  {
+    return $this->getEntityManager()->getRepository("LecturasBundle:Lectura")
+                        ->createQueryBuilder('l')
+                        ->orderBy('l.fecha','DESC')
+                        ->setMaxResults(1)
+                        ->getQuery()
+                        ->getOneOrNullResult();
+
+  }
 }

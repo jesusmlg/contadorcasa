@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Factura</h1>
+
+  {{ form_start(form) }}
+    {{ form_errors(form)}}
+    <div class="form-group">
+      {{ form_row(form.lectura) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.importe) }}
+    </div>
+    <div class="form-group jesus" style="display: block">
+      {{ form_row(form.fecha) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.Agregar) }}
+    </div>
+  {{ form_end(form) }}
+
+{% endblock %}

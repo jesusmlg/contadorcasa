@@ -18,7 +18,28 @@
 
 	  {{ form_end(form)}}
 	</div>
+  <hr>
 
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="text-center">
+        <b>Ultima Factura de {{ UltimaFactura.fecha | date ("d-m-Y") }}<b>
+      </div>
+      <div class="text-center">
+        <a href="{{ path('facturas_agregar')}}" class="btn btn-warning" >Nueva Factura</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <li><b>Importe: </b> {{ UltimaFactura.importe }}€</li>
+      <li><b>Lectura: </b> {{ UltimaFactura.lectura }} KW</li>
+    </div>
+  </div>
+
+  <hr>
+    <h3>KW consumidos desde la última factura <b>{{ totalKWDesdeFactura }}</b></h3>
+  <hr>
 	<div id="lecturas"></div>
 	{{ areachart('lecturas','lecturas') |raw }}
 

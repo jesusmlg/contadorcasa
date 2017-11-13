@@ -1,0 +1,7 @@
+facturas_homepage:
+    path:     /
+    defaults: { _controller: FacturasBundle:Default:index }
+
+facturas_agregar:
+  path: /agregar
+  defaults: { _controller: FacturasBundle:Facturas:agregar }

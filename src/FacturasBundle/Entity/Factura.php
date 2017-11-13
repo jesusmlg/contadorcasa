@@ -1,16 +1,16 @@
 <?php
 
-namespace LecturasBundle\Entity;
+namespace FacturasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Lectura
+ * Factura
  *
- * @ORM\Table(name="lectura")
- * @ORM\Entity(repositoryClass="LecturasBundle\Repository\LecturaRepository")
+ * @ORM\Table(name="factura")
+ * @ORM\Entity(repositoryClass="FacturasBundle\Repository\FacturaRepository")
  */
-class Lectura
+class Factura
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Lectura
     /**
      * @var string
      *
-     * @ORM\Column(name="lectura", type="decimal", precision=5, scale=0)
+     * @ORM\Column(name="lectura", type="string", length=255)
      */
     private $lectura;
 
@@ -34,6 +34,13 @@ class Lectura
      * @ORM\Column(name="fecha", type="datetime")
      */
     private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="importe", type="decimal", precision=5, scale=2)
+     */
+    private $importe;
 
 
     /**
@@ -51,7 +58,7 @@ class Lectura
      *
      * @param string $lectura
      *
-     * @return Lectura
+     * @return Factura
      */
     public function setLectura($lectura)
     {
@@ -75,7 +82,7 @@ class Lectura
      *
      * @param \DateTime $fecha
      *
-     * @return Lectura
+     * @return Factura
      */
     public function setFecha($fecha)
     {
@@ -95,14 +102,26 @@ class Lectura
     }
 
     /**
-     * Get fecha
+     * Set importe
+     *
+     * @param string $importe
+     *
+     * @return Factura
+     */
+    public function setImporte($importe)
+    {
+        $this->importe = $importe;
+
+        return $this;
+    }
+
+    /**
+     * Get importe
      *
      * @return string
      */
-    public function getFechaString()
+    public function getImporte()
     {
-        $res = $this->getFecha()->format('d-m-Y');
-        return $res;
-
+        return $this->importe;
     }
 }
