@@ -19,28 +19,28 @@ class Factura
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $id=0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="lectura", type="string", length=255)
      */
-    private $lectura;
+    private $lectura="0";
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="datetime")
      */
-    private $fecha;
+    private $fecha="01-01-1900";
 
     /**
      * @var string
      *
      * @ORM\Column(name="importe", type="decimal", precision=5, scale=2)
      */
-    private $importe;
+    private $importe="0";
 
 
     /**

@@ -19,21 +19,21 @@ class Lectura
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $id=0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="lectura", type="decimal", precision=5, scale=0)
      */
-    private $lectura;
+    private $lectura = "0";
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="datetime")
      */
-    private $fecha;
+    private $fecha = "01-01-1900";
 
 
     /**

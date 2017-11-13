@@ -4,6 +4,7 @@ namespace LecturasBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LecturasBundle\Entity\Lectura;
+use FacturasBundle\Entity\Factura;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use LecturasBundle\Form\LecturaType;
@@ -18,7 +19,19 @@ class LecturasController extends Controller
         $ultimaFactura = $em->getRepository("FacturasBundle:Factura")->UltimaFactura();
         $ultimaLectura = $em->getRepository("LecturasBundle:Lectura")->UltimaLectura();
 
-        $totalKWDesdeFactura = $ultimaLectura->getLectura() - $ultimaFactura->getLectura();
+
+        if($ultimaFactura!= null && $ultimaLectura!= null)
+          $totalKWDesdeFactura = $ultimaLectura->getLectura() - $ultimaFactura->getLectura();
+        else
+        {
+          $totalKWDesdeFactura = 0;
+          $ultimaFactura = new Factura();
+          $ultimaLectura = new Lectura();
+        }
+
+
+
+
 
         $lecturas = $em->getRepository("LecturasBundle:Lectura")->findBy(array(),array('fecha' => 'DESC'));
 
