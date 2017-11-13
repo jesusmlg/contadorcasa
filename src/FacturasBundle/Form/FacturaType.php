@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 
 class FacturaType extends AbstractType
@@ -18,7 +19,7 @@ class FacturaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('lectura',TextType::class, array('attr' => array ('class' => 'form-control')))
-                ->add('importe',TextType::class, array('attr' => array ('class' => 'form-control')))
+                ->add('importe',MoneyType::class, array('attr' => array ('class' => 'form-control')))
                 ->add('fecha',DateTimeType::class,array(
                     'data' => new \DateTime("now"),
                     'date_format' => 'dd-MM-yyyy', 'attr' => array('class' => 'form-control input-inline datepicker'))
