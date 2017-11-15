@@ -20,10 +20,18 @@ class LecturasController extends Controller
         $ultimaLectura = $em->getRepository("LecturasBundle:Lectura")->UltimaLectura();
 
 
+
+
         if($ultimaFactura!= null && $ultimaLectura!= null)
+        {
           $totalKWDesdeFactura = $ultimaLectura->getLectura() - $ultimaFactura->getLectura();
+          $dias = ($ultimaLectura->getFecha()->diff($ultimaFactura->getFecha()))->format('%R%a');
+          //$dias = $diasintervalo->format('%R%a');
+          $mediaKWDiaria = $totalKWDesdeFactura / $dias;
+        }
         else
         {
+          $mediaKWDiaria = 0;
           $totalKWDesdeFactura = 0;
           $ultimaFactura = new Factura();
           $ultimaLectura = new Lectura();
@@ -82,7 +90,8 @@ class LecturasController extends Controller
         return $this->render('LecturasBundle::index.html.twig', array('lecturas' => $result,
                                                                       'form' => $form->createView(),
                                                                       'UltimaFactura' => $ultimaFactura,
-                                                                      'totalKWDesdeFactura'=> $totalKWDesdeFactura
+                                                                      'totalKWDesdeFactura'=> $totalKWDesdeFactura,
+                                                                      'mediaKWDiaria' => $mediaKWDiaria
                                                                     ));
     }
 

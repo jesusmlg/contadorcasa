@@ -18,14 +18,17 @@
 
 	  {{ form_end(form)}}
 	</div>
+
+
+
   <hr>
-
-
+    <h4>KW consumidos desde la última factura <b>{{ totalKWDesdeFactura }} Kw</b> media diaria <b>{{ mediaKWDiaria}} Kw</b></h4>
+  <hr>
 
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class="text-center">
-        <b>Ultima Factura de {{ UltimaFactura.fecha | date ("d-m-Y") }}<b>
+        <b>Ultima Factura de {{ UltimaFactura.fecha | date ("d-m-Y") }}</b>
       </div>
       <div class="text-center">
         <a href="{{ path('facturas_agregar')}}" class="btn btn-warning" >Nueva Factura</a>
@@ -37,14 +40,12 @@
     </div>
   </div>
 
-  <hr>
-    <h3>KW consumidos desde la última factura <b>{{ totalKWDesdeFactura }}</b></h3>
-  <hr>
 	<div id="lecturas"></div>
 	{{ areachart('lecturas','lecturas') |raw }}
 
 	<H3 class="text-center">CONSUMOS</H3>
-	{% set lant = "" %}
+
+  {% set lant = "" %}
 	<table class="table">
 	  <thead class="thead-dark">
 	    <tr>
