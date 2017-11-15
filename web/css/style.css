@@ -7,3 +7,7 @@
 	display: inline;
 	margin-left: 20px;
 }
+.t-consumos th {
+  color: #FFF;
+  background-color: #f0ad4e;
+}
