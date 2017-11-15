@@ -25,7 +25,7 @@ class LecturasController extends Controller
         if($ultimaFactura!= null && $ultimaLectura!= null)
         {
           $totalKWDesdeFactura = $ultimaLectura->getLectura() - $ultimaFactura->getLectura();
-          $dias = ($ultimaLectura->getFecha()->diff($ultimaFactura->getFecha()))->format('%R%a');
+          $dias = ($ultimaFactura->getFecha()->diff($ultimaLectura->getFecha()))->format('%R%a');
           $mediaKWDiaria = number_format(($totalKWDesdeFactura / $dias), 2, ',','.');
 
         }
