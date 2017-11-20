@@ -10,15 +10,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FacturasController extends Controller
 {
-    public function indexAction()
-    {
-        return $this->render('FacturasBundle:Default:index.html.twig');
-    }
 
     public function agregarAction(Request $request)
     {
       $form = $this->createForm(FacturaType::class);
       $em = $this->getDoctrine()->getEntityManager();
+
+      $facturas = $em->getRepository("FacturasBundle:Factura")->findAll();
+      //$listadofacturas = $facturas;
+      $paginator = $this->get('knp_paginator');
+      $listadofacturas = $paginator->paginate(
+          $facturas, // $dql
+          $request->query->getInt('page',1),
+          5
+      );
 
       $form->handleRequest($request);
 
@@ -31,6 +36,7 @@ class FacturasController extends Controller
           return $this->redirectToRoute('lecturas_homepage');
       }
 
-      return $this->render('FacturasBundle::new.html.twig', array('form' => $form->createView()));
+      return $this->render('FacturasBundle::new.html.twig', array('form' => $form->createView(),
+                                                                  'facturas' => $listadofacturas));
     }
 }

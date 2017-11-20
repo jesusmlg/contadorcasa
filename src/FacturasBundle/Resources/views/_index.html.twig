@@ -1,0 +1,25 @@
+<h4 class="text-center">Facturas</h4>
+
+<table class="table">
+  <thead class="t-consumos">
+    <tr>
+      <th scope="col" width="30%">Fecha</th>
+      <th scope="col">Importe</th>
+      <th scope="col">Consumo</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+<tbody>
+  {% for f in facturas %}
+    <tr>
+      <td>{{ f.fecha | date ("d-m-Y") }}</td>
+      <td>{{ f.importe }} Kw</td>
+      <td>{{ f.lectura }}</td>
+      <td><a href="#" onclick="return confirm('¿Estás seguro de querer borrar?')">Borrar</a></td>
+    </tr>
+  {% endfor %}
+</tbody>
+</table>
+<div class="navigation text-center">
+  {{ knp_pagination_render(facturas) }}
+</div>
