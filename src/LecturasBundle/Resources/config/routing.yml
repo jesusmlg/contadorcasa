@@ -4,3 +4,6 @@ lecturas_homepage:
 lecturas_eliminar:
   path: /lecturas/{id}/eliminar
   defaults: { _controller: LecturasBundle:Lecturas:eliminar, id: id }
+lecturas_fixtures:
+  path: /lecturas/fixtures
+  defaults: { _controller: LecturasBundle:Lecturas:fixtures }

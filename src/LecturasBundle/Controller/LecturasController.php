@@ -112,4 +112,23 @@ class LecturasController extends Controller
 
 
     }
+
+    // public function fixturesAction()
+    // {
+    //   $em = $this->getDoctrine()->getManager();
+    //   $kw= 2000;
+    //   for($i=0;$i<27;$i++)
+    //   {
+    //     $kw+= rand(3,14);
+    //     $lectura = new Lectura();
+    //
+    //     $lectura->setLectura($kw);
+    //     $lectura->setFecha(new \DateTime('2017-11-'.($i+1)));
+    //
+    //     $em->persist($lectura);
+    //     $em->flush();
+    //   }
+    //
+    //   return $this->redirectToRoute('lecturas_homepage');
+    // }
 }

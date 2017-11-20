@@ -61,7 +61,7 @@
 		      <td>{{ l.fecha | date ("d-m-Y") }}</td>
 		      <td>{{ l.lectura }} Kw</td>
 		      <td>{% if lant != "" %}{{ lant - l.lectura }} {% else %} 0 {% endif %} Kw</td>
-		      <td><a href="{{ path('lecturas_eliminar',{'id': l.id})}}">Borrar</a></td>
+		      <td><a href="{{ path('lecturas_eliminar',{'id': l.id})}}" onclick="return confirm('¿Estás seguro de querer borrar?')">Borrar</a></td>
 			{% set lant = l.lectura %}
 		    </tr>
 	    {% endfor %}
