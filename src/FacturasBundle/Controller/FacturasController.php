@@ -7,8 +7,9 @@ use LecturasBundle\Entity\Lectura;
 use FacturasBundle\Entity\Factura;
 use FacturasBundle\Form\FacturaType;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Controller\IAccesoUsuarioController;
 
-class FacturasController extends Controller
+class FacturasController extends Controller implements IAccesoUsuarioController
 {
 
     public function agregarAction(Request $request)
@@ -38,5 +39,24 @@ class FacturasController extends Controller
 
       return $this->render('FacturasBundle::new.html.twig', array('form' => $form->createView(),
                                                                   'facturas' => $listadofacturas));
+    }
+
+    public function eliminarAction(Request $request)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $id = $request->get('id');
+      if($id!="")
+      {
+        $factura = $em->getRepository("FacturasBundle:Factura")->find($id);
+        $em->remove($factura);
+        $em->flush();
+      }
+
+
+      return $this->redirectToRoute('facturas_agregar');
+
+
+
     }
 }

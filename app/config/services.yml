@@ -4,6 +4,11 @@ parameters:
     #parameter_name: value
 
 services:
+    app.acceso_usuarios.action_listener:
+      class: AppBundle\EventListener\AccesoUsuarioListener
+      arguments: ['%contador_pass%','@router']
+      tags:
+        - {name: kernel.event_listener, event: kernel.controller, method: onKernelController}
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services

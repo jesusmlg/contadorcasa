@@ -2,6 +2,12 @@
 
 {% block body %}
 
+{% for m in app.flashes('msg') %}
+  <div class="alert alert-notice">
+    {{ m }}
+  </div>
+{% endfor %}
+
 <h1>Factura</h1>
 
   {{ form_start(form) }}

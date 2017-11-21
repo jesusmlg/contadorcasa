@@ -9,8 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use LecturasBundle\Form\LecturaType;
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Controller\IAccesoUsuarioController;
 
-class LecturasController extends Controller
+class LecturasController extends Controller implements IAccesoUsuarioController
 {
     public function indexAction(Request $request)
     {

@@ -15,7 +15,7 @@
       <td>{{ f.fecha | date ("d-m-Y") }}</td>
       <td>{{ f.importe }} Kw</td>
       <td>{{ f.lectura }}</td>
-      <td><a href="#" onclick="return confirm('¿Estás seguro de querer borrar?')">Borrar</a></td>
+      <td><a href="{{ path('facturas_eliminar',{id: f.id})}}" onclick="return confirm('¿Estás seguro de querer borrar la factura?')">Borrar</a></td>
     </tr>
   {% endfor %}
 </tbody>

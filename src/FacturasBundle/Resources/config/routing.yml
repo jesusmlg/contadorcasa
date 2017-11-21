@@ -1,7 +1,11 @@
 facturas_homepage:
     path:     /
-    defaults: { _controller: FacturasBundle:Default:index }
+    defaults: { _controller: FacturasBundle:Facturas:index }
 
 facturas_agregar:
   path: /agregar
   defaults: { _controller: FacturasBundle:Facturas:agregar }
+
+facturas_eliminar:
+  path: /{id}/eliminar
+  defaults: { _controller: FacturasBundle:Facturas:eliminar, id: id}
