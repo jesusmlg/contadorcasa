@@ -47,7 +47,6 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         //LAVA GRAPHICS
         $lava = $this->get('lavacharts');
         $data = $lava->DataTable();
-
         $data->addDateColumn('Fecha')->addNumberColumn('Lectura');
 
         foreach ($lecturas as $l) {
