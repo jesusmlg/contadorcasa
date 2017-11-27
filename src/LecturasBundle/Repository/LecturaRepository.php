@@ -12,12 +12,28 @@ class LecturaRepository extends \Doctrine\ORM\EntityRepository
 {
   public function UltimaLectura()
   {
-    return $this->getEntityManager()->getRepository("LecturasBundle:Lectura")
-                        ->createQueryBuilder('l')
-                        ->orderBy('l.fecha','DESC')
-                        ->setMaxResults(1)
-                        ->getQuery()
-                        ->getOneOrNullResult();
+    return $this->getEntityManager()
+    			->getRepository("LecturasBundle:Lectura")
+                ->createQueryBuilder('l')
+                ->orderBy('l.fecha','DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getOneOrNullResult();
+
+  }
+
+  public function lecturasPostFactura()
+  {
+  	
+  	$ultimaFactura = $this->UltimaLectura();
+
+  	return $this->getEntityManager()
+  				->getRepository("LecturasBundle:Lectura")
+                ->createQueryBuilder('l')
+                ->where("l.fecha > '".$ultimaFactura->getFecha()->format('Y-m-d')."'")
+                ->orderBy('l.fecha','DESC')
+                ->getQuery()
+                ->getResult();
 
   }
 }

@@ -21,8 +21,6 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         $ultimaLectura = $em->getRepository("LecturasBundle:Lectura")->UltimaLectura();
 
 
-
-
         if($ultimaFactura!= null && $ultimaLectura!= null)
         {
           $totalKWDesdeFactura = $ultimaLectura->getLectura() - $ultimaFactura->getLectura();
@@ -39,11 +37,9 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         }
 
 
+        $lecturas = $em->getRepository("LecturasBundle:Lectura")->lecturasPostFactura();
 
-
-
-        $lecturas = $em->getRepository("LecturasBundle:Lectura")->findBy(array(),array('fecha' => 'DESC'));
-
+        
         $form = $this->createForm(LecturaType::class);
 
         $form->handleRequest($request);
@@ -66,8 +62,8 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         //END LAVA GRAPHICS
 
         //PAGINATION
-        $dql = "SELECT lb FROM LecturasBundle:Lectura lb";
-        $query = $em->createQuery($dql);
+        //$dql = "SELECT lb FROM LecturasBundle:Lectura lb";
+        //$query = $em->createQuery($dql);
         $paginator = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $lecturas, // $dql
@@ -114,22 +110,4 @@ class LecturasController extends Controller implements IAccesoUsuarioController
 
     }
 
-    // public function fixturesAction()
-    // {
-    //   $em = $this->getDoctrine()->getManager();
-    //   $kw= 2000;
-    //   for($i=0;$i<27;$i++)
-    //   {
-    //     $kw+= rand(3,14);
-    //     $lectura = new Lectura();
-    //
-    //     $lectura->setLectura($kw);
-    //     $lectura->setFecha(new \DateTime('2017-11-'.($i+1)));
-    //
-    //     $em->persist($lectura);
-    //     $em->flush();
-    //   }
-    //
-    //   return $this->redirectToRoute('lecturas_homepage');
-    // }
 }
