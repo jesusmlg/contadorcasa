@@ -30,7 +30,8 @@ class LecturaRepository extends \Doctrine\ORM\EntityRepository
   	return $this->getEntityManager()
   				->getRepository("LecturasBundle:Lectura")
                 ->createQueryBuilder('l')
-                ->where("l.fecha > '".$ultimaFactura->getFecha()->format('Y-m-d H:i:s')."'")
+                ->where("l.fecha > :fecha")
+                ->setParameter('fecha',$ultimaFactura->getFecha())
                 ->orderBy('l.fecha','DESC')
                 ->getQuery()
                 ->getResult();
