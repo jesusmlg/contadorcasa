@@ -105,4 +105,36 @@ class Lectura
         return $res;
 
     }
+
+    /**
+     * Get day of week in spanish
+     * @return string
+    */
+
+    public function getDayOfWeek()
+    {
+      switch ($this->fecha->format('w')) {
+        case 0:
+          return 'dom';
+          break;
+        case 1:
+          return 'lun';
+          break;
+        case 2:
+          return 'mar';
+          break;
+        case 3:
+          return 'mie';
+          break;
+        case 4:
+          return 'jue';
+          break;
+        case 5:
+          return 'vie';
+          break;
+        case 6:
+          return 'sab';
+          break;
+      }
+    }
 }

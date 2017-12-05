@@ -81,7 +81,7 @@ class Lavacharts
 
         if(!$first){
             $lecturaDelDia = $l->getLectura() - $lanterior->getLectura();
-            $datatable->addRow([$lanterior->getFecha()->format('d-m-Y'),$lecturaDelDia]);
+            $datatable->addRow([$lanterior->getDayOfWeek(),$lecturaDelDia]);
         }
         $first = false;
         $lanterior = $l;
