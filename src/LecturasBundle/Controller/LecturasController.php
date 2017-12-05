@@ -53,7 +53,9 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         'minValue' => 0
         ]]);
 
-        $lava->ColumnChart('ultimosdiezdias',$datolava->ultimosDiezDias() );
+        $lava->ColumnChart('ultimosdiezdias',$datolava->ultimosDiezDias(),['vAxis' => [
+        'minValue' => 0
+        ]]);
 
 
         //END LAVA GRAPHICS

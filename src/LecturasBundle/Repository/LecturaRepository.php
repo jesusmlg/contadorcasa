@@ -1,6 +1,7 @@
 <?php
 
 namespace LecturasBundle\Repository;
+use LecturasBundle\Entity\Lectura;
 
 /**
  * LecturaRepository
@@ -25,7 +26,11 @@ class LecturaRepository extends \Doctrine\ORM\EntityRepository
   public function lecturasPostFactura()
   {
 
-  	$ultimaFactura = $this->getEntityManager()->getRepository("FacturasBundle:Factura")->UltimaFactura();
+
+  	if(!$ultimaFactura = $this->getEntityManager()->getRepository("FacturasBundle:Factura")->UltimaFactura())
+      $ultimaFactura = new Lectura;
+    
+
 
   	return $this->getEntityManager()
   				->getRepository("LecturasBundle:Lectura")

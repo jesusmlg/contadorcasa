@@ -21,7 +21,11 @@ class Lavacharts
   }
   public function ComparativoMesAnio()
   {
-    $ultimaLecturaActual = $this->ultimaLectura();
+
+    $datatable = $this->lava->DataTable();
+
+    if(!$ultimaLecturaActual = $this->ultimaLectura())
+      return $datatable;
 
     $interval = new \DateInterval('P1M');
     $interval->invert = 1;
@@ -33,16 +37,16 @@ class Lavacharts
 
     $rsmb = new ResultSetMappingBuilder($this->entityManager);
     $rsmb->addRootEntityFromClassMetadata('LecturasBundle\Entity\Lectura', 'l');
-    $lecturaMesPasado = $this->entityManager
-                               ->createNativeQuery($sql,$rsmb)
-                               ->getOneOrNullResult();
+
+    if(!$lecturaMesPasado = $this->entityManager->createNativeQuery($sql,$rsmb)->getOneOrNullResult())
+    return $datatable;
 
 
 
 
-    $data = $this->lava->DataTable();
 
-    $data->addStringColumn('Food Poll')
+
+    $datatable->addStringColumn('Contador')
       ->addNumberColumn('Lecturas')
       ->addRow(['Mes Actual: '.$ultimaLecturaActual->getFecha()->format('d-m-Y'),  $ultimaLecturaActual->getLectura()])
       ->addRow(['Mes Anterior'.$lecturaMesPasado->getFecha()->format('d-m-Y'),  $lecturaMesPasado->getLectura()]);
@@ -50,7 +54,7 @@ class Lavacharts
 
     //$lava->BarChart('comparativo', $data);
 
-    return $data;
+    return $datatable;
 
   }
 
@@ -72,6 +76,7 @@ class Lavacharts
               ->addNumberColumn('Lecturas');
 
     $first = true;
+
     foreach ($lecturas as $l) {
 
         if(!$first){
