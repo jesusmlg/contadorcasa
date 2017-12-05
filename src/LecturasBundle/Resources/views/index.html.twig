@@ -40,8 +40,13 @@
     </div>
   </div>
 
-	<div id="lecturas"></div>
-	{{ areachart('lecturas','lecturas') |raw }}
+	<div id="ultimosdiezdias"></div>
+	{{ columnchart('ultimosdiezdias','ultimosdiezdias') |raw }}
+
+  <hr />
+  <div id="comparativo"></div>
+  {{ barchart('comparativo','comparativo') |raw }}
+  <hr />
 
 	<H3 class="text-center">CONSUMOS</H3>
 

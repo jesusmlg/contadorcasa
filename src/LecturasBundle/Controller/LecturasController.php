@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use LecturasBundle\Form\LecturaType;
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Controller\IAccesoUsuarioController;
+use LecturasBundle\Lavacharts\Lavacharts;
 
 class LecturasController extends Controller implements IAccesoUsuarioController
 {
@@ -39,24 +40,21 @@ class LecturasController extends Controller implements IAccesoUsuarioController
 
         $lecturas = $em->getRepository("LecturasBundle:Lectura")->lecturasPostFactura();
 
-        
+
         $form = $this->createForm(LecturaType::class);
 
         $form->handleRequest($request);
 
         //LAVA GRAPHICS
         $lava = $this->get('lavacharts');
-        $data = $lava->DataTable();
-        $data->addDateColumn('Fecha')->addNumberColumn('Lectura');
+        $datolava = $this->container->get(Lavacharts::class);
 
-        foreach ($lecturas as $l) {
+        $lava->BarChart('comparativo', $datolava->ComparativoMesAnio(), ['hAxis' => [
+        'minValue' => 0
+        ]]);
 
-          $row = [$l->getFechaString(), $l->getLectura()];
-          $data->addRow($row);
-        }
+        $lava->ColumnChart('ultimosdiezdias',$datolava->ultimosDiezDias() );
 
-
-        $lava->AreaChart('lecturas', $data,['title' => 'Lecturas Dibujo']);
 
         //END LAVA GRAPHICS
 
@@ -82,6 +80,8 @@ class LecturasController extends Controller implements IAccesoUsuarioController
           return $this->redirectToRoute('lecturas_homepage');
 
         }
+
+
 
         return $this->render('LecturasBundle::index.html.twig', array('lecturas' => $result,
                                                                       'form' => $form->createView(),
