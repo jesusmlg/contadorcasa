@@ -31,14 +31,14 @@ class Estimacion
     /**
      * @var string
      *
-     * @ORM\Column(name="preciokw", type="decimal", precision=5, scale=2, nullable=true)
+     * @ORM\Column(name="preciokw", type="decimal", precision=7, scale=5, nullable=true)
      */
     private $preciokw;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="iva", type="decimal", precision=7, scale=5, nullable=true)
+     * @ORM\Column(name="iva", type="decimal", precision=5, scale=2, nullable=true)
      */
     private $iva;
 

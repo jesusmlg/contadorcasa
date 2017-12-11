@@ -122,7 +122,7 @@ class LecturasController extends Controller implements IAccesoUsuarioController
 
     private function numN2($n)
     {
-      return number_format($n, 2, ',','.')
+      return number_format($n, 2, ',','.');
     }
 
 }
