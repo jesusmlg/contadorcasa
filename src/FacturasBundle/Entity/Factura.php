@@ -45,7 +45,7 @@ class Factura
     /**
      * @var string
      *
-     * @ORM\Column(name="consumo", type="string", length=255)
+     * @ORM\Column(name="consumo", type="string", length=255, nullable=true)
      */
     private $consumo="0";
 
