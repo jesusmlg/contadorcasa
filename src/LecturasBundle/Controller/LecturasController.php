@@ -21,7 +21,7 @@ class LecturasController extends Controller implements IAccesoUsuarioController
 
         $ultimaFactura = $em->getRepository("FacturasBundle:Factura")->UltimaFactura();
         $ultimaLectura = $em->getRepository("LecturasBundle:Lectura")->UltimaLectura();
-        $estimacion = $em->getREpository("FacturasBundle:Estimacion")->valoresEstimacion();
+        $estimacion = $em->getRepository("FacturasBundle:Estimacion")->valoresEstimacion();
 
         if($ultimaFactura!= null && $ultimaLectura!= null)
         {
@@ -29,8 +29,12 @@ class LecturasController extends Controller implements IAccesoUsuarioController
           $dias = ($ultimaFactura->getFecha()->diff($ultimaLectura->getFecha()))->format('%R%a');
           $mediaKWDiaria = number_format(($totalKWDesdeFactura / $dias), 2, ',','.');
 
-          $gastoActual = ((($estimacion->getPreciokw() * $totalKWDesdeFactura) + $estimacion->getFijo())+$estimacion->getIva()) / 100;
-          $gastoPrevision = ((($estimacion->getPreciokw() * $mediaKWDiaria * 61) + $estimacion->getFijo())+$estimacion->getIva()) / 100;
+
+            $gastoActual = ($estimacion) ? ((($estimacion->getPreciokw() * $totalKWDesdeFactura) + $estimacion->getFijo())+$estimacion->getIva()) / 100 : 0;
+            $gastoPrevision = ($estimacion) ? ((($estimacion->getPreciokw() * $mediaKWDiaria * 61) + $estimacion->getFijo())+$estimacion->getIva()) / 100 : 0;
+          }
+
+
 
         }
         else
