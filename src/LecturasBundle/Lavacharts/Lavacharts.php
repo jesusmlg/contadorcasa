@@ -128,7 +128,7 @@ class Lavacharts
   {
     return $this->entityManager->getRepository('FacturasBundle:Factura')
                                ->createQueryBuilder('f')
-                               ->where("f.fecha< '".$this->ultimaFactura()->getFecha()."'")
+                               ->where("f.fecha< '".$this->ultimaFactura()->getFecha()->format('Y-m-d')."'")
                                ->orderBy('f.fecha','DESC')
                                ->setMaxResults(1)
                                ->getQuery()
