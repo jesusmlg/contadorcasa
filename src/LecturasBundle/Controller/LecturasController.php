@@ -30,8 +30,8 @@ class LecturasController extends Controller implements IAccesoUsuarioController
           $mediaKWDiaria = number_format(($totalKWDesdeFactura / $dias), 2, ',','.');
 
 
-          $gastoActual = ($estimacion) ? ((($estimacion->getPreciokw() * $totalKWDesdeFactura) + $estimacion->getFijo())+$estimacion->getIva()) / 100 : 0;
-          $gastoPrevision = ($estimacion) ? ((($estimacion->getPreciokw() * $mediaKWDiaria * 61) + $estimacion->getFijo())+$estimacion->getIva()) / 100 : 0;
+          $gastoActual = ($estimacion) ? ((($estimacion->getPreciokw() * $totalKWDesdeFactura) + $estimacion->getFijo()) * $estimacion->getIva()) / 100 : 0;
+          $gastoPrevision = ($estimacion) ? ((($estimacion->getPreciokw() * $mediaKWDiaria * 61) + $estimacion->getFijo()) * $estimacion->getIva()) / 100 : 0;
 
         }
         else
