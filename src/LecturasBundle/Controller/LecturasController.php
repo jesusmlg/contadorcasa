@@ -27,7 +27,7 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         {
           $totalKWDesdeFactura = $ultimaLectura->getLectura() - $ultimaFactura->getLectura();
           $dias = ($ultimaFactura->getFecha()->diff($ultimaLectura->getFecha()))->format('%R%a');
-          $mediaKWDiaria = ($dias >0 ) ? number_format(($totalKWDesdeFactura / $dias), 2, ',','.') : 0;
+          $mediaKWDiaria = ($dias >0 ) ? ($totalKWDesdeFactura / $dias) : 0;
 
           $iva = (1+($estimacion->getIva()/ 100));
 
@@ -96,10 +96,10 @@ class LecturasController extends Controller implements IAccesoUsuarioController
                                                                       'form' => $form->createView(),
                                                                       'UltimaFactura' => $ultimaFactura,
                                                                       'totalKWDesdeFactura'=> $totalKWDesdeFactura,
-                                                                      'mediaKWDiaria' => $mediaKWDiaria,
+                                                                      'mediaKWDiaria' => $this->numN2($mediaKWDiaria),
                                                                       'estimacion' => $estimacion,
-                                                                      'gastoActual' => $gastoActual,
-                                                                      'gastoPrevision' => $gastoPrevision
+                                                                      'gastoActual' => $this->numN2($gastoActual),
+                                                                      'gastoPrevision' => $this->numN2($gastoPrevision)
                                                                     ));
     }
 
@@ -118,7 +118,11 @@ class LecturasController extends Controller implements IAccesoUsuarioController
 
       return $this->redirectToRoute('lecturas_homepage');
 
+    }
 
+    private function numN2($n)
+    {
+      return number_format($n, 2, ',','.')
     }
 
 }
