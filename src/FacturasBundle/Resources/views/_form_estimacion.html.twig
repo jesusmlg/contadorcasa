@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <h4>Estimación</h4>
+  {{ form_start(form) }}
+    <div class="form-group">
+      {{ form_row(form.fijo) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.preciokw) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.iva) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.agregar) }}
+    </div>
+  {{ form_end(form) }}
+{% endblock %}

@@ -22,7 +22,14 @@
 
 
   <hr>
-    <h4>KW consumidos desde la última factura <b>{{ totalKWDesdeFactura }} Kw</b> media diaria <b>{{ mediaKWDiaria}} Kw</b></h4>
+    <h4>- KW consumidos desde la última factura <b>{{ totalKWDesdeFactura }} Kw</b> media diaria <b>{{ mediaKWDiaria}} Kw</b></h4>
+    <h4>
+      - Estimacion economica: Actual <b>{{ gastoActual }}€</b> ,
+      estimado para 2 meses <b>{{ gastoPrevision }} </b>
+    </h4>
+    <p>
+      <a href="{{ path('estimacion_agregar') }}">Modificar Estimaciones</a>
+    </p>
   <hr>
 
   <div class="panel panel-default">

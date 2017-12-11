@@ -11,6 +11,10 @@ lecturas:
     resource: "@LecturasBundle/Resources/config/routing.yml"
     prefix:   /
 
+estimacion_agregar:
+  path: /estimacion
+  defaults: { _controller: FacturasBundle:Facturas:estimacion }
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation

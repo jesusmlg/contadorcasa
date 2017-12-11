@@ -8,6 +8,7 @@ use FacturasBundle\Entity\Factura;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use LecturasBundle\Form\LecturaType;
+use FacturasBundle\Entity\Estimacion;
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Controller\IAccesoUsuarioController;
 use LecturasBundle\Lavacharts\Lavacharts;
@@ -20,13 +21,16 @@ class LecturasController extends Controller implements IAccesoUsuarioController
 
         $ultimaFactura = $em->getRepository("FacturasBundle:Factura")->UltimaFactura();
         $ultimaLectura = $em->getRepository("LecturasBundle:Lectura")->UltimaLectura();
-
+        $estimacion = $em->getREpository("FacturasBundle:Estimacion")->valoresEstimacion();
 
         if($ultimaFactura!= null && $ultimaLectura!= null)
         {
           $totalKWDesdeFactura = $ultimaLectura->getLectura() - $ultimaFactura->getLectura();
           $dias = ($ultimaFactura->getFecha()->diff($ultimaLectura->getFecha()))->format('%R%a');
           $mediaKWDiaria = number_format(($totalKWDesdeFactura / $dias), 2, ',','.');
+
+          $gastoActual = ((($estimacion->getPreciokw() * $totalKWDesdeFactura) + $estimacion->getFijo())+$estimacion->getIva()) / 100;
+          $gastoPrevision = ((($estimacion->getPreciokw() * $mediaKWDiaria * 61) + $estimacion->getFijo())+$estimacion->getIva()) / 100;
 
         }
         else
@@ -35,6 +39,7 @@ class LecturasController extends Controller implements IAccesoUsuarioController
           $totalKWDesdeFactura = 0;
           $ultimaFactura = new Factura();
           $ultimaLectura = new Lectura();
+          $gastoActual = $gastoPrevision = 0;
         }
 
 
@@ -89,7 +94,10 @@ class LecturasController extends Controller implements IAccesoUsuarioController
                                                                       'form' => $form->createView(),
                                                                       'UltimaFactura' => $ultimaFactura,
                                                                       'totalKWDesdeFactura'=> $totalKWDesdeFactura,
-                                                                      'mediaKWDiaria' => $mediaKWDiaria
+                                                                      'mediaKWDiaria' => $mediaKWDiaria,
+                                                                      'estimacion' => $estimacion,
+                                                                      'gastoActual' => $gastoActual,
+                                                                      'gastoPrevision' => $gastoPrevision
                                                                     ));
     }
 
