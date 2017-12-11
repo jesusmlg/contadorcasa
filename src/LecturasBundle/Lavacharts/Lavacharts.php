@@ -113,7 +113,7 @@ class Lavacharts
 
   private function ultimaFactura()
   {
-    return $this->entityManager->getRepository('FacturasBUndle:Factura')
+    return $this->entityManager->getRepository('FacturasBundle:Factura')
                                ->createQueryBuilder('f')
                                ->orderBy('f.fecha','DESC')
                                ->setMaxResults(1)
