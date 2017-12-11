@@ -130,28 +130,4 @@ class Factura
     {
         return $this->importe;
     }
-
-    /**
-     * Set consumo
-     *
-     * @param string $consumo
-     *
-     * @return Factura
-     */
-    public function setConsumo($consumo)
-    {
-        $this->consumo = $consumo;
-
-        return $this;
-    }
-
-    /**
-     * Get consumo
-     *
-     * @return string
-     */
-    public function getConsumo()
-    {
-        return $this->consumo;
-    }
 }

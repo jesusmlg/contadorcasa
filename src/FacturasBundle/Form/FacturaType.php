@@ -19,6 +19,7 @@ class FacturaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('lectura',TextType::class, array('attr' => array ('class' => 'form-control')))
+                ->add('consumo',TextType::class,array('attr' =>array('class' => 'form-control')))
                 ->add('importe',MoneyType::class, array('attr' => array ('class' => 'form-control')))
                 ->add('fecha',DateTimeType::class,array(
                     'data' => new \DateTime("now"),

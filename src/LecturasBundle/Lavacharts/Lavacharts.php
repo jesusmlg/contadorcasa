@@ -27,6 +27,9 @@ class Lavacharts
     if(!$ultimaLecturaActual = $this->ultimaLectura())
       return $datatable;
 
+    if(!$ultimaFactura = $this->ultimaFactura())
+      return $datatable;
+
     $interval = new \DateInterval('P1M');
     $interval->invert = 1;
     $ultimaMesPasado = $ultimaLecturaActual->getFecha()->add($interval);
@@ -43,13 +46,10 @@ class Lavacharts
 
 
 
-
-
-
     $datatable->addStringColumn('Contador')
       ->addNumberColumn('Lecturas')
-      ->addRow(['Mes Actual: '.$ultimaLecturaActual->getFecha()->format('d-m-Y'),  $ultimaLecturaActual->getLectura()])
-      ->addRow(['Mes Anterior'.$lecturaMesPasado->getFecha()->format('d-m-Y'),  $lecturaMesPasado->getLectura()]);
+      ->addRow(['Mes Actual: '.$ultimaLecturaActual->getFecha()->format('d-m-Y'),  $ultimaLecturaActual->getLectura() - $ultimaFactura->getLectura()])
+      ->addRow(['Mes Anterior: '.$lecturaMesPasado->getFecha()->format('d-m-Y'),  $ultimaFactura->getConsumo()]);
 
 
     //$lava->BarChart('comparativo', $data);
@@ -103,4 +103,23 @@ class Lavacharts
 
     return $ultimaLecturaActual;
   }
+
+  private function consumoDesdeUltFactura()
+  {
+    $repo = $this->entityManager->getRepository('LecturasBundle:Lectura');
+
+    //$dato = $repo->
+  }
+
+  private function ultimaFactura()
+  {
+    return $this->entityManager->getRepository('FacturasBUndle:Factura')
+                               ->createQueryBuilder('f')
+                               ->orderBy('f.fecha','DESC')
+                               ->setMaxResults(1)
+                               ->getQuery()
+                               ->getOneOrNullResult();
+  }
+
+
 }

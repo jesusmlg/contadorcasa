@@ -6,6 +6,7 @@
       <th scope="col" width="30%">Fecha</th>
       <th scope="col">Importe</th>
       <th scope="col">Consumo</th>
+      <th scope="col">Lectura</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
@@ -13,7 +14,8 @@
   {% for f in facturas %}
     <tr>
       <td>{{ f.fecha | date ("d-m-Y") }}</td>
-      <td>{{ f.importe }} Kw</td>
+      <td>{{ f.importe }} €</td>
+      <td>{{ f.consumo }}</td>
       <td>{{ f.lectura }}</td>
       <td><a href="{{ path('facturas_eliminar',{id: f.id})}}" onclick="return confirm('¿Estás seguro de querer borrar la factura?')">Borrar</a></td>
     </tr>
