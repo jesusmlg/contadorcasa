@@ -70,7 +70,7 @@
 	  <tbody>
 	  	{% for l in lecturas %}
 		    <tr>
-		      <td>{{ l.fecha | date ("d-m-Y","Europe/Madrid")) }}</td>
+		      <td>{{ l.fecha | date ("d-m-Y","Europe/Madrid") }}</td>
 		      <td>{{ l.lectura }} Kw</td>
 		      <td>{% if lant != "" %}{{ lant - l.lectura }} {% else %} 0 {% endif %} Kw</td>
 		      <td><a href="{{ path('lecturas_eliminar',{'id': l.id})}}" onclick="return confirm('¿Estás seguro de querer borrar?')">Borrar</a></td>
