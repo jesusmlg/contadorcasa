@@ -45,7 +45,7 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         }
 
 
-        $lecturas = $em->getRepository("LecturasBundle:Lectura")->lecturasPostFactura();
+        
 
         $form = $this->createForm(LecturaType::class);
 
@@ -69,6 +69,9 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         //PAGINATION
         //$dql = "SELECT lb FROM LecturasBundle:Lectura lb";
         //$query = $em->createQuery($dql);
+        
+        $lecturas = $em->getRepository("LecturasBundle:Lectura")->lecturasPostFactura();
+
         $paginator = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $lecturas, // $dql

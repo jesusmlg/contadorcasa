@@ -33,29 +33,36 @@ class Lavacharts
     if(!$penultimaFactura = $this->penultimaFactura())
         return $datatable;
 
-    $interval = new \DateInterval('P1M');
+    $interval = new \DateInterval('P2M');
     $interval->invert = 1;
-    $ultimaMesPasado = $ultimaLecturaActual->getFecha()->add($interval);
+    $fechaUltimaMesPasado = $ultimaLecturaActual->getFecha();
+    $fechaUltimaMesPasado->add($interval);
 
-     $sql = "SELECT l.* FROM lectura l WHERE
-     l.fecha = (SELECT max(l2.fecha) FROM lectura l2 WHERE l2.fecha <= '".$ultimaMesPasado->format('Y-m-d')."')";
+     //$sql = "SELECT l.* FROM lectura l WHERE
+     //l.fecha = (SELECT max(l2.fecha) FROM lectura l2 WHERE l2.fecha <= '".$fechaUltimaMesPasado->format('Y-m-d')."')";
 
+    $sql = "SELECT l.* FROM lectura l WHERE
+    l.fecha = (SELECT min(l2.fecha) FROM lectura l2 WHERE l2.fecha >= '".$fechaUltimaMesPasado->format('Y-m-d')."')";
+    
+    $interval->invert = 0;
+    $fechaUltimaMesPasado->add($interval);
 
     $rsmb = new ResultSetMappingBuilder($this->entityManager);
     $rsmb->addRootEntityFromClassMetadata('LecturasBundle\Entity\Lectura', 'l');
 
     if(!$lecturaMesPasado = $this->entityManager->createNativeQuery($sql,$rsmb)->getOneOrNullResult())
-    return $datatable;
-
+      return $datatable;
 
 
     $datatable->addStringColumn('Contador')
-      ->addNumberColumn('Lecturas')
+      ->addNumberColumn('Lectura')
       ->addRow(['Mes Actual: '.$ultimaLecturaActual->getFecha()->format('d-m-Y'),  $ultimaLecturaActual->getLectura() - $ultimaFactura->getLectura()])
       ->addRow(['Mes Anterior: '.$lecturaMesPasado->getFecha()->format('d-m-Y'),  $lecturaMesPasado->getLectura() - $penultimaFactura->getLectura() ]);
 
 
     //$lava->BarChart('comparativo', $data);
+    
+    
 
     return $datatable;
 
