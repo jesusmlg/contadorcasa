@@ -52,7 +52,7 @@ class Lavacharts
     $datatable->addStringColumn('Contador')
       ->addNumberColumn('Lecturas')
       ->addRow(['Mes Actual: '.$ultimaLecturaActual->getFecha()->format('d-m-Y'),  $ultimaLecturaActual->getLectura() - $ultimaFactura->getLectura()])
-      ->addRow(['Mes Anterior: '.$lecturaMesPasado->getFecha()->format('d-m-Y'),  $ultimaFactura->getLectura() - $penultimaFactura->getLectura() ]);
+      ->addRow(['Mes Anterior: '.$lecturaMesPasado->getFecha()->format('d-m-Y'),  $lecturaMesPasado->getLectura() - $penultimaFactura->getLectura() ]);
 
 
     //$lava->BarChart('comparativo', $data);
