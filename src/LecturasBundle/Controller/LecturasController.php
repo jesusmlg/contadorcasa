@@ -45,8 +45,8 @@ class LecturasController extends Controller implements IAccesoUsuarioController
         }
 
 
-        $lecturas = $em->getRepository("LecturasBundle:Lectura")->lecturasPostFactura();
-
+        #$lecturas = $em->getRepository("LecturasBundle:Lectura")->lecturasPostFactura();
+        $lecturas = $em->getRepository("LecturasBundle:Lectura")->findAll();
 
         $form = $this->createForm(LecturaType::class);
 
